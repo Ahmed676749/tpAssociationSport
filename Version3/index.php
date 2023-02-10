@@ -1,5 +1,5 @@
 <div>
-    <a href="index.php?tab=array">Accueil</a>
+    <a href="index.php">Accueil</a>
     <form method="post" action="formAdherant.php">
         <button type="submit">Ajouter adhérant</button>
     </form>
@@ -7,12 +7,13 @@
 <?php
 
 include("connect.php");
-include("functions/memberManager.php");
+require("member_Manager.php");
+require("objetMembre.php");
 // $nom = $_POST['nom']??"";
 // $prenom = $_POST['prenom']??"";
 // $mail = $_POST['mail']??"";
 // $tel = $_POST['tel']??"";
-$sportId = $_POST['sport']??"";
+// $sportId = $_POST['sport']??"";
 // $idMembre = $_GET['id'];
 
 // if(count($_POST) > 0){
@@ -40,10 +41,21 @@ $sportId = $_POST['sport']??"";
 
 // }
 
-addNewMember();
-$tabAdherant = getAllMember();
+// addNewMember();
 
+
+
+// $tabAdherant = getAllMember();
+$manager = new MemberManager;
+$tabAdherant = $manager->getAllMember();
 foreach($tabAdherant as $adherant) {
+    require_once("objetMembre.php");
+    // include("member_Manager.php");
+
+    $objAdherant = new Membre;
+    
+    
+    $objAdherant->hydrate($adherant);
 ?>  
     <div>
         <h1><?= $adherant['member_id']?></h1>
@@ -56,6 +68,8 @@ foreach($tabAdherant as $adherant) {
     </div>
 <?php
     }
+
+    $manager->addNewMember();
 ?>
 
 
