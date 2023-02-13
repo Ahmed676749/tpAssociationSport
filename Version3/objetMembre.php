@@ -1,9 +1,23 @@
 <?php
     class Membre {
-        protected $_lastName;
-        protected $_firstName;
-        protected $_email;
-        protected $_phone;
+        private $_id;
+        private $_lastName;
+        private $_firstName;
+        private $_email;
+        private $_phone;
+
+        public function __construct() 
+        {
+            
+        }
+
+        public function getId() {
+            return $this->_id;
+        }
+
+        public function setId($id) {
+            return $this->_id = $id;
+        }
 
         public function getLastName() {
             return $this->_lastName;
@@ -39,7 +53,7 @@
 
         public function hydrate($arrData){
 			foreach($arrData as $key=>$value){
-				$strMethod = "set".ucfirst(str_replace("offre_", "", $key));
+				$strMethod = "set".ucfirst(str_replace("member_", "", $key));
 				if (method_exists($this, $strMethod)){
 					$this->$strMethod($value); 
 				}

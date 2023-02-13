@@ -1,14 +1,14 @@
 <?php
 include_once("objetMembre.php");
-    class MemberManager extends Membre {
+    class MemberManager {
 
-        public function addNewMember(){
+        public function addNewMember(Membre $new){
             require("connect.php");
-            if(count($_POST) > 0){
             $rqAjouterAd = "INSERT INTO member (member_lastname, member_firstname, member_email, member_phone)
-                            VALUES ('".$_POST['nom']."', '".$_POST['prenom']."', '".$_POST['mail']."', '".$_POST['tel']."')";
+                            VALUES ('".$new->getLastName()."', '".$new->getfirstName()."', '".$new->getEmail()."', '".$new->getPhone()."')";
             $rqAjoutAdherant = $db->exec($rqAjouterAd);
-            }
+            return $rqAjoutAdherant;
+            
         }
 
         public function editMember($idMembreAmodifier){

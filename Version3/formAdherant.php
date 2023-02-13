@@ -11,19 +11,19 @@ $tabSport = $db->query($rqSport)->fetchAll();
     <form method = "post" action="index.php">
         <div class="champ">
             <label for="nom">Nom</label>
-            <input id="nom" type="text" name="nom">
+            <input id="nom" type="text" name="member_lastname">
         </div>
         <div class="champ">
             <label for="prenom">Prénom</label>
-            <input id="prenom" type="text" name="prenom">
+            <input id="prenom" type="text" name="member_firstname">
         </div>
         <div class="champ">
             <label for="mail">Mail</label>
-            <input id="mail" type="email" name="mail">
+            <input id="mail" type="email" name="member_email">
         </div>
         <div class="champ">
             <label for="tel">Téléphone</label>
-            <input id="tel" type="text" name="tel">
+            <input id="tel" type="text" name="member_phone">
         </div>
         <div>
             <label for="sport">Sports</label>

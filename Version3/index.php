@@ -8,7 +8,7 @@
 
 include("connect.php");
 require("member_Manager.php");
-require("objetMembre.php");
+require_once("objetMembre.php");
 // $nom = $_POST['nom']??"";
 // $prenom = $_POST['prenom']??"";
 // $mail = $_POST['mail']??"";
@@ -56,20 +56,29 @@ foreach($tabAdherant as $adherant) {
     
     
     $objAdherant->hydrate($adherant);
+    // echo "<pre>";
+    // print_r($objAdherant);
 ?>  
     <div>
-        <h1><?= $adherant['member_id']?></h1>
-        <a href="detailsAdherant.php?id=<?= $adherant['member_id']?>">
-            <p>Nom de l'adhérant : <?= $adherant['member_lastname']?></p>
-            <p>prenom de l'adhérant: <?=$adherant['member_firstname']?></p>
+        <h1><?= $objAdherant->getId();?></h1>
+        <a href="detailsAdherant.php?id=<?= $objAdherant->getId();?>">
+            <p>Nom de l'adhérant : <?= $objAdherant->getLastName();?></p>
+            <p>prenom de l'adhérant: <?= $objAdherant->getfirstName();?></p>
         </a>
-        <a href="modifierAd.php?id=<?= $adherant['member_id']?>">Modifier</a>
-        <a href="index.php?id=<?= $adherant['member_id']?>&delete=1">Supprimer</a>
+        <a href="modifierAd.php?id=<?= $objAdherant->getId();?>">Modifier</a>
+        <a href="index.php?id=<?= $objAdherant->getId();?>&delete=1">Supprimer</a>
     </div>
 <?php
     }
 
-    $manager->addNewMember();
+    if(count($_POST) > 0) {
+        $managerAdd = new MemberManager;
+        $newMembre = new Membre;
+        $newMembre->hydrate($_POST);
+        $managerAdd->addNewMember($newMembre);
+    }
+
+
 ?>
 
 
